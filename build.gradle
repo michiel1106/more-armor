@@ -22,10 +22,18 @@ repositories {
 	maven {
 		url = "https://maven.minecraftforge.net/"
 	}
+
+	maven {
+		url "https://cursemaven.com"
+	}
 }
 
 dependencies {
 	minecraft "net.minecraftforge:forge:1.12.2-14.23.5.2860"
+
+	runtimeOnly fg.deobf("curse.maven:iceandfire-rlcraft-888556:6596246")
+	compileOnly fg.deobf("curse.maven:iceandfire-rlcraft-888556:6596246")
+
 }
 
 minecraft {

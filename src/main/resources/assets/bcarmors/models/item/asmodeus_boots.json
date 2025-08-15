@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "bcarmors:items/armor_black_boots_shocked"
+  }
+}
