@@ -3,13 +3,23 @@ package com.example;
 import com.example.item.CustomArmor;
 
 import com.example.models.ModelBloodedLightningDragonArmor;
+import com.lycanitesmobs.core.entity.creature.EntityAmalgalich;
+import com.lycanitesmobs.core.entity.creature.EntityAsmodeus;
+import com.lycanitesmobs.core.entity.creature.EntityRahovart;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.boss.EntityDragon;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.SoundEvents;
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemArmor;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.EnumHelper;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.entity.living.LivingDeathEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,7 +46,7 @@ public class SampleMod112 {
 
 	public static ItemArmor.ArmorMaterial ARMOR_MATERIAL = EnumHelper.addArmorMaterial("BETTER_ARMOR",
 			"bcarmors:textures/models/armor/better_armor",
-			800,
+			600,
 			new int[] {7, 10, 13, 7},
 			20,
 			SoundEvents.ITEM_ARMOR_EQUIP_DIAMOND,
@@ -63,12 +73,73 @@ public class SampleMod112 {
 	@SubscribeEvent
 	public void registerItems(RegistryEvent.Register<Item> event) {
 
-		event.getRegistry().register(BETTER_HELMET.setRegistryName(MODID, "ender_dragon_head_piece").setTranslationKey("ender_dragon_head_piece"));
-		event.getRegistry().register(BETTER_CHESTPLATE.setRegistryName(MODID, "rahovart_chest_piece").setTranslationKey("rahovart_chest_piece"));
-		event.getRegistry().register(BETTER_LEGGINGS.setRegistryName(MODID, "amalgalich_leggings").setTranslationKey("amalgalich_leggings"));
-		event.getRegistry().register(BETTER_BOOTS.setRegistryName(MODID, "asmodeus_boots").setTranslationKey("asmodeus_boots"));
+		event.getRegistry().register(BETTER_HELMET.setRegistryName(MODID, "ender_dragon_head_piece").setTranslationKey("ender_dragon_head_piece").setMaxDamage(9999));
+		event.getRegistry().register(BETTER_CHESTPLATE.setRegistryName(MODID, "rahovart_chest_piece").setTranslationKey("rahovart_chest_piece").setMaxDamage(9999));
+		event.getRegistry().register(BETTER_LEGGINGS.setRegistryName(MODID, "amalgalich_leggings").setTranslationKey("amalgalich_leggings").setMaxDamage(9999));
+		event.getRegistry().register(BETTER_BOOTS.setRegistryName(MODID, "asmodeus_boots").setTranslationKey("asmodeus_boots").setMaxDamage(9999));
 
 	}
+
+	@SubscribeEvent
+	public void entityDeath(LivingDeathEvent event) {
+
+		Entity entity = event.getEntity();
+
+		World entityWorld = entity.getEntityWorld();
+
+
+		if (entityWorld.isRemote) {
+			return;
+		}
+
+		if (entity instanceof EntityDragon) {
+
+			EntityDragon dragon = (EntityDragon)entity;
+
+			BlockPos position = dragon.getPosition();
+
+			EntityItem entityItem = new EntityItem(entityWorld, position.getX(), position.getY(), position.getZ(), new ItemStack(BETTER_HELMET));
+
+			entityWorld.spawnEntity(entityItem);
+		}
+
+		if (entity instanceof EntityRahovart) {
+
+			EntityRahovart dragon = (EntityRahovart)entity;
+
+			BlockPos position = dragon.getPosition();
+
+			EntityItem entityItem = new EntityItem(entityWorld, position.getX(), position.getY(), position.getZ(), new ItemStack(BETTER_CHESTPLATE));
+
+			entityWorld.spawnEntity(entityItem);
+		}
+
+		if (entity instanceof EntityAmalgalich) {
+
+			EntityAmalgalich dragon = (EntityAmalgalich)entity;
+
+			BlockPos position = dragon.getPosition();
+
+			EntityItem entityItem = new EntityItem(entityWorld, position.getX(), position.getY(), position.getZ(), new ItemStack(BETTER_LEGGINGS));
+
+			entityWorld.spawnEntity(entityItem);
+		}
+
+		if (entity instanceof EntityAsmodeus) {
+
+			EntityAsmodeus dragon = (EntityAsmodeus)entity;
+
+			BlockPos position = dragon.getPosition();
+
+			EntityItem entityItem = new EntityItem(entityWorld, position.getX(), position.getY(), position.getZ(), new ItemStack(BETTER_BOOTS));
+
+			entityWorld.spawnEntity(entityItem);
+		}
+
+
+
+	}
+
 
 
 }
