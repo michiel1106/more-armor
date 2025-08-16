@@ -1,6 +1,6 @@
 {
   "parent": "item/generated",
   "textures": {
-    "layer0": "bcarmors:items/armor_black_leggings_shocked"
+    "layer0": "bcarmors:items/amalgalich_leggings"
   }
 }
