@@ -34,6 +34,12 @@ dependencies {
 	runtimeOnly fg.deobf("curse.maven:iceandfire-rlcraft-888556:6596246")
 	compileOnly fg.deobf("curse.maven:iceandfire-rlcraft-888556:6596246")
 
+
+	runtimeOnly fg.deobf("curse.maven:lycanites-mobs-224770:5750564")
+	compileOnly fg.deobf("curse.maven:lycanites-mobs-224770:5750564")
+
+
+
 }
 
 minecraft {
