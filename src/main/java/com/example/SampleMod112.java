@@ -37,6 +37,7 @@ public class SampleMod112 {
 	public static final String VERSION = "1.0";
 
 
+
 	public static final ModelBloodedLightningDragonArmor ARMOR_MODEL_NO_LEGS = new ModelBloodedLightningDragonArmor(0.5F, false);
 	public static final ModelBloodedLightningDragonArmor ARMOR_MODEL_LEGS = new ModelBloodedLightningDragonArmor(0.2F, true);
 	
